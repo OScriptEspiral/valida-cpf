@@ -2,17 +2,8 @@
 
 fun main(args : Array<String>) {
 
-    val cpf = args[0]
-    var algarismo : Int
-    var soma = 0
+    val lista = List(9) { Character.getNumericValue(args[0].get(it)) }
 
-    for ( i in 0..8 ) {
+    println( lista.mapIndexed { i, algarismo -> algarismo * (10 - i) }.sum() )
 
-        algarismo = Character.getNumericValue(cpf.get(i))
-        println("Posição $i Algarismo $algarismo Multiplicador ${10 - i}")
-
-        soma += algarismo * (10 - i)
-    }
-
-    println(soma)
 }
