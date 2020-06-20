@@ -1,17 +1,19 @@
 
 fun main(args : Array<String>) {
 
-    val soma = List(9) { Character.getNumericValue(args[0].get(it)) }
-        .mapIndexed { i, alg -> alg * (10 - i) }
-        .sum()
+    val cpf = args[0].map { Character.getNumericValue(it) }
 
-    val primeiroDígitoCalculado =
-        if ( soma % 11 < 2 ) 0 else 11 - soma % 11
+    fun soma (teto : Int) =
+        List(9) { cpf.get(it) }
+            .mapIndexed { i, alg -> alg * (teto - i) }
+            .sum()
+    fun digito (s : Int) = if (s % 11 < 2) 0 else 11 - s % 11
 
-    val primeiroDígitoFornecido = Character.getNumericValue(args[0].get(9))
+    val dig1 = digito(soma(10))
+    val dig2 = digito(soma(11) + 2 * dig1)
 
-    if ( primeiroDígitoCalculado != primeiroDígitoFornecido )
-        println( "Inválido" )
-    else
+    if ( dig1 == cpf[9] && dig2 == cpf[10] )
         println( "Válido" )
+    else
+        println( "Inválido" )
 }
